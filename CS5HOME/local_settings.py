@@ -10,4 +10,4 @@ SECRET_KEY = 'g06uaa3i%a@*td3ht3q(*^it=__7h)=x*1hz2iqlfgd9gsulyw'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['clienteservidorthomas15.herokuapp.com']
+ALLOWED_HOSTS = ['*']
