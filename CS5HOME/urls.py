@@ -21,9 +21,6 @@ from django.urls import path, re_path
 from rest_framework import routers, serializers, viewsets
 from rest_framework_swagger.views import get_swagger_view
 
-from Login2.views import l
-
-
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
@@ -44,12 +41,6 @@ urlpatterns = [
     re_path(r'^api/v1/example/', include('Example1.urls')),
     re_path(r'^api/v1/example2/', include('Example2.urls')),
     re_path(r'^api/v1/login/', include('Login.urls')),
-    path('api/v1/entrar', include('Login2.urls'),name = 'Login2'),
-    path('logout/',l.as_view() ,name ='logout'),
-    path('api/v1/inicio', include('Dashboard.urls'),name = 'Dashboard'),
-    re_path(r'^api/v1/', include('Landing.urls')),
-    re_path(r'^api/v1/registrate/', include('Register.urls')),
-    
     
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url('swagger/', schema_view),
