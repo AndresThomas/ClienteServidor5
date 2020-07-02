@@ -49,4 +49,12 @@ class ExampleDetail(APIView):
             else:
                 return Response("Ingrese un formato valido")
         else:
-            return Response("no hay datos")
+            return Response("Este elemento no existe")
+
+    def delete(self, request, id, format=None):
+        user = self.get_object(id)
+        if user != 404:
+            user.delete()
+            return Response('Elemento borrado', status=status.HTTP_200_OK)
+        else:
+            return Response(user, status=status.HTTP_404_NOT_FOUND)

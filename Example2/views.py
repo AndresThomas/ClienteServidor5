@@ -22,4 +22,38 @@ class ExampleList(APIView):
             serializer.save()
             datas = serializer.data
             return Response(datas)
-            
+class Example2Detail(APIView):
+    def get_object(self,id):
+        try:
+            return Example2.objects.get(pk = id)
+        except Example2.DoesNotExist:
+            return 404
+    
+    def get(self, request, id ,format = None):
+        example_object = self.get_object(id) 
+        if example_object != 404:
+            serializer = Example2Serializers(example_object)
+            return Response(serializer.data)
+        return Response("No hay datos")
+    
+    def put(self,request,id,format = None):
+        modify = self.get_object(id)
+
+        if modify != 404:
+            serializer = Example2Serializers(modify, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                datas = serializer.data
+                return Response(datas)
+            else:
+                return Response("Ingrese un formato valido")
+        else:
+            return Response("no hay datos")
+
+    def delete(self, request, id, format=None):
+        user = self.get_object(id)
+        if user != 404:
+            user.delete()
+            return Response('Elemento borrado', status=status.HTTP_200_OK)
+        else:
+            return Response(user, status=status.HTTP_404_NOT_FOUND)
