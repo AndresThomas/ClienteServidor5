@@ -1,1 +1,1 @@
-python manage.py runserver --settings=CS5HOME.deveploment
+python manage.py runserver --settings=CS5HOME.development
