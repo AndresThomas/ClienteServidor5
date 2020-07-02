@@ -41,7 +41,7 @@ class ExampleDetail(APIView):
         modify = self.get_object(id)
 
         if modify != 404:
-            serializer = ExampleSerializers(modify, data=request.data)
+            serializer = Example1Serializers(modify, data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 datas = serializer.data
