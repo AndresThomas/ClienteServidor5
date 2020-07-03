@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework_swagger',
     'Login','Example1','Example2',
+    'Register',
 ]
 
 SITE_ID = 1
@@ -53,7 +54,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.IsAuthenticated',],
     'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authentication.TokenAuthentication',],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 100
+    'PAGE_SIZE': 100,
 
 }
 
@@ -139,10 +140,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-#LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL= reverse_lazy('Dashboard')
-LOGOUT_REDIRECT_URL= reverse_lazy('Login2')
 
 
 # Static files (CSS, JavaScript, Images)

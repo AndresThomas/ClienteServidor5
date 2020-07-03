@@ -26,10 +26,12 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         model = User
         fields = ['url', 'username', 'email', 'is_staff']
 
+# ViewSets define the view behavior.
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+# Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 
@@ -38,10 +40,10 @@ schema_view = get_swagger_view(title='Pastebin API')
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     re_path(r'^api/v1/example/', include('Example1.urls')),
     re_path(r'^api/v1/example2/', include('Example2.urls')),
-    re_path(r'^api/v1/login/', include('Login.urls')),
-    
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    re_path(r'^api/v1/login/', include('Login.urls')),    
+    re_path(r'^api/v1/register/', include('Register.urls')),    
     url('swagger/', schema_view),
 ]
