@@ -7,3 +7,4 @@ class Example1Serializers(serializers.ModelSerializer):
     class Meta:
         model = Example1
         fields = ('__all__')
+        
