@@ -6,22 +6,27 @@ from django.http import Http404
 
 
 # Create your views here.
-from Example1.models import Example1
 from Example1.serializer import Example1Serializers
+from django.core.exceptions import ValidationError
 
 class ExampleList(APIView):
+
     def get(self, request, format = None):
         print("Get in 15")
-        queryset = Example1.objects.all()
+        queryset = Example1Serializers.objects.all()
         serializer = Example1Serializers(queryset, many = True)
         return Response(serializer.data)
 
     def post(self, request, format = None):
         serializer = Example1Serializers(data = request.data)
+        print(serializer.is_valid())
         if serializer.is_valid():
-            serializer.save()
-            datas = serializer.data
-            return Response(datas)
+           serializer.save()
+           datas = serializer.data
+           return Response(datas)
+        else:
+            return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
+    
 
 class ExampleDetail(APIView):
     def get_object(self,id):

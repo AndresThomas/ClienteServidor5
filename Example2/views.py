@@ -1,27 +1,33 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, generics
-
 from django.http import Http404
-from django.shortcuts import get_object_or_404
+
 
 # Create your views here.
-from Example2.models import Example2
 from Example2.serializer import Example2Serializers
+from django.core.exceptions import ValidationError
 
 class ExampleList(APIView):
+
     def get(self, request, format = None):
-        queryset = Example2.objects.all()
+        print("Get in 15")
+        queryset = Example2Serializers.objects.all()
         serializer = Example2Serializers(queryset, many = True)
         return Response(serializer.data)
 
     def post(self, request, format = None):
         serializer = Example2Serializers(data = request.data)
+        print(serializer.is_valid())
         if serializer.is_valid():
-            serializer.save()
-            datas = serializer.data
-            return Response(datas)
+           serializer.save()
+           datas = serializer.data
+           return Response(datas)
+        else:
+            return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
+    
+
 class Example2Detail(APIView):
     def get_object(self,id):
         try:
@@ -48,7 +54,7 @@ class Example2Detail(APIView):
             else:
                 return Response("Ingrese un formato valido")
         else:
-            return Response("no hay datos")
+            return Response("Este elemento no existe")
 
     def delete(self, request, id, format=None):
         user = self.get_object(id)
