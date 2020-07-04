@@ -8,12 +8,12 @@ from django.http import Http404
 # Create your views here.
 from Example2.serializer import Example2Serializers
 from django.core.exceptions import ValidationError
-
+from Example2.models import Example2
 class ExampleList(APIView):
 
     def get(self, request, format = None):
         print("Get in 15")
-        queryset = Example2Serializers.objects.all()
+        queryset = Example2.objects.all()
         serializer = Example2Serializers(queryset, many = True)
         return Response(serializer.data)
 
