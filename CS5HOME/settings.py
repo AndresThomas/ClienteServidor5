@@ -27,7 +27,7 @@ EMAIL_HOST = config('EMAIL_HOST', default='localhost')
 EMAIL_PORT = config('EMAIL_PORT', default=25, cast=int)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = False
+DEBUG = False
 
 ALLOWED_HOSTS = ['clienteservidorthomas15.herokuapp.com']
 
