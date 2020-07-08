@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 
 class UserSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField()
-    username = serializers.CharField(required = False)
-    email    = serializers.CharField()
+    username = serializers.CharField()
+    email    = serializers.CharField(required = False)
     password = serializers.CharField()
     
     def create(self, validate_data):
