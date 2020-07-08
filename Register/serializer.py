@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class UserSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField()
-    username = serializers.CharField()
+    username = serializers.CharField(require = False)
     email    = serializers.CharField()
     password = serializers.CharField()
     
@@ -12,8 +12,8 @@ class UserSerializer(serializers.ModelSerializer):
         instance.username = validate_data.get('username')
         instance.email = validate_data.get('email')
         instance.set_password(validate_data.get('password'))
-        if len( instance.email ) == 0:
-            instance.email = 'not email'
+        """ if len( instance.email ) == 0:
+            instance.email = 'not email' """
         instance.save()
         return instance
     
