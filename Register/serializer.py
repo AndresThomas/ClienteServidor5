@@ -12,11 +12,11 @@ class UserSerializer(serializers.ModelSerializer):
         instance.username = validate_data.get('username')
         instance.email = validate_data.get('email')
         instance.set_password(validate_data.get('password'))
-        
-        if instance.email == '':
-            print('email vacio')
+        if len( instance.email ) == 0:
+            instance.email = 'not email'
         instance.save()
         return instance
+    
     
     def validate_username(self, data):
         users = User.objects.filter(username = data)
