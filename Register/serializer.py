@@ -13,8 +13,8 @@ class UserSerializer(serializers.ModelSerializer):
         instance.email = validate_data.get('email')
         instance.set_password(validate_data.get('password'))
         print('soy email',instance.email)
-        """ if len( instance.email ) == 0:
-            instance.email = 'not email'"""
+        if instance.email  == None:
+            instance.email = 'not email'
         instance.save()
         return instance
     
