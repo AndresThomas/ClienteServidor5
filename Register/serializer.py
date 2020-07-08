@@ -12,6 +12,9 @@ class UserSerializer(serializers.ModelSerializer):
         instance.username = validate_data.get('username')
         instance.email = validate_data.get('email')
         instance.set_password(validate_data.get('password'))
+        
+        if instance.email == '':
+            print('email vacio')
         instance.save()
         return instance
     
@@ -24,4 +27,4 @@ class UserSerializer(serializers.ModelSerializer):
             return data
     class Meta:
         model = User
-        fields = ('username','password')
+        fields = ('__all__')
